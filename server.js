@@ -10,25 +10,30 @@ let PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'db')))
 
-const note = [];
-
-
-
 // Create Routes
-
 // GET '*' index.html]
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "public/index.html"));
 });
 // GET '/notes' (returns notes.html) 
 app.get("/notes", function(req, res) {
+
+    // creates variable to read json of notes
+    notes = JSON.parse(fs.readFileSync(path.join(__dirname, "/db/db.json"), { encoding: 'utf-8'}));
+
     res.sendFile(path.join(__dirname, "public/notes.html"));
+
+    console.log(notes);
 });
 
+// app.post();
+
 // Create API Routes
-
-// GET '/api/notes -- read db.json ad return all saved notes
-
+// GET '/api/notes -- read db.json and return all saved notes
+// app.get("/api/notes", function(req, res) {
+//     res.sendFile(path.join(__dirname, "/db/db.json"));
+// })
+    
 // POST '/api/notes/:id' should receive new note to save on the request body, add to 'db.json'
 
 // DELETE '/api/notes/:id' - should receive a query param containing the id of note to delete
