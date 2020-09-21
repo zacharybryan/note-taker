@@ -7,6 +7,8 @@ const app = express();
 let PORT = process.env.PORT || 3000;
 
 // Recommended to start with this code already 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'db')))
 
@@ -27,8 +29,14 @@ app.get("/notes", function (req, res) {
 });
 
 app.post("/api/notes", function (req, res) {
+    let newNote = req.body;
     notes = JSON.parse(fs.readFileSync(path.join(__dirname, "/db/db.json"), { encoding: "utf-8" }));
     console.log(notes);
+
+    newNote.routeName = newNote.title.replace(/  /g, "").toLowerCase();
+    newNote.id = moment().format();
+
+    console.log(newNote);
 });
 
 // Create API Routes
