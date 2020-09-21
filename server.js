@@ -10,6 +10,17 @@ let PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'db')))
 
+// Create Routes
+
+// GET '*' index.html]
+app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/index.html"));
+});
+// GET '/notes' (returns notes.html) 
+app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
+});
+
 app.listen(PORT, function(err) {
     if (err) console.log(err);
     console.log("App listening on PORT " + PORT);
