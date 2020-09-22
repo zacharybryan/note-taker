@@ -24,14 +24,20 @@ app.get("/notes", function (req, res) {
     notes = JSON.parse(fs.readFileSync(path.join(__dirname, "/db/db.json"), { encoding: 'utf-8' }));
 
     res.sendFile(path.join(__dirname, "public/notes.html"));
-
+    
     console.log(notes);
 });
+// Create API Routes
+// GET '/api/notes  -- read db.json and return all saved notes
 
+// POST '/api/notes/:id' should receive new note to save on the request body, add to 'db.json'
 app.post("/api/notes", function (req, res) {
     let newNote = req.body;
     notes = JSON.parse(fs.readFileSync(path.join(__dirname, "/db/db.json"), { encoding: "utf-8" }));
     console.log(notes);
+
+
+// gives note id by time stamp using moment 
 
     newNote.routeName = newNote.title.replace(/  /g, "").toLowerCase();
     newNote.id = moment().format();
@@ -39,14 +45,7 @@ app.post("/api/notes", function (req, res) {
     console.log(newNote);
 });
 
-// Create API Routes
-// GET '/api/notes -- read db.json and return all saved notes
 
-// app.get("/api/notes", function(req, res) {
-
-// })
-
-// POST '/api/notes/:id' should receive new note to save on the request body, add to 'db.json'
 
 // DELETE '/api/notes/:id' - should receive a query param containing the id of note to delete
 
