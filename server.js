@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(express.static('db'));
 
+require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 app.listen(PORT, function () {
