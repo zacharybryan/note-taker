@@ -1,4 +1,6 @@
 var noteData = require("../db/db.json");
+const fs = require("fs");
+const path = require("path");
 
 // ===============================================================================
 // ROUTING
@@ -7,6 +9,7 @@ var noteData = require("../db/db.json");
 module.exports = function (app) {
 
     app.get("/api/notes", function (req, res) {
+        notesData = JSON.parse(fs.readFileSync(path.join(__dirname, "../db/db.json"), {encoding: "utf8"}))
         res.json(notesData);
         console.log("this is notes data", noteData);
     });
