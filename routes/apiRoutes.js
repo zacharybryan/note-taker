@@ -35,7 +35,7 @@ module.exports = function (app) {
         res.json(newNote);
     });
 
-    app.post("/api/clear", function (req, res) {
+    app.delete("/api/notes/", function (req, res) {
         // Empty out the arrays of data
         notesData.length = 0;
         res.json({ ok: true });
