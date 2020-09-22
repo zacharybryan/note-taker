@@ -1,9 +1,9 @@
 // ===============================================================================
 // DEPENDENCIES
-// We need to include the path package to get the correct file path for our html
 // ===============================================================================
+var noteData = require("../db/db.json");
 var path = require("path");
-
+const fs = require("fs");
 
 // ===============================================================================
 // ROUTING
@@ -20,7 +20,9 @@ module.exports = function (app) {
     });
 
     app.get("/notes", function (req, res) {
+        notesData = JSON.parse(fs.readFileSync(path.join(__dirname, "../db/db.json"), {encoding: "utf8"}))
         res.sendFile(path.join(__dirname, "../public/notes.html"));
+        // return res.json(notesData);
     });
 
     // If no matching route is found default to home

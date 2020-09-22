@@ -1,3 +1,6 @@
+// ===============================================================================
+// DEPENDENCIES
+// ===============================================================================
 var noteData = require("../db/db.json");
 const fs = require("fs");
 const path = require("path");
@@ -15,8 +18,9 @@ module.exports = function (app) {
     });
 
     app.post("/api/notes", function (req, res) {
-            notesData.push(req.body);
-            res.json(true);
+            let newNote = req.body;
+            notesData = JSON.parse(fs.readFileSync(path.join(__dirname, "../db/db.json"), {encoding: "utf8"}));
+            console.log("new note", newNote);
     });
 
     app.post("/api/clear", function (req, res) {
